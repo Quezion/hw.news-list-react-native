@@ -1,7 +1,10 @@
 {:source-paths ["src/main"
                 "src/test"]
 
- :dependencies [[reagent "1.1.0"]
+ :dependencies [;; CLJS interface to React.js
+                [reagent "1.1.0"]
+
+                ;; Event-driven architectural framework for Reagent based apps
                 [re-frame "1.2.0"]]
 
  :builds       {:app {:target           :react-native

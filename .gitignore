@@ -1,0 +1,22 @@
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.jks
+*.p12
+*.key
+*.mobileprovision
+out/
+.shadow-cljs/
+.nrepl-port
+pom.xml
+.idea/
+*.iml
+app/*
+# Include this file to make EAS Build work.
+# See https://github.com/expo/fyi/blob/master/eas-build-archive.md for details and another option.
+!app/index.js
+.cpcache
+/web-build
+.calva/output-window/
+.lsp/sqlite*.db
+.DS_Store

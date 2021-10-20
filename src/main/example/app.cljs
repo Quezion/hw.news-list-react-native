@@ -8,41 +8,20 @@
             ["react-native" :as rn]
             [reagent.core :as r]))
 
-(def shadow-splash (js/require "../assets/shadow-cljs.png"))
-(def cljs-splash (js/require "../assets/cljs.png"))
-
 (defn root []
-  (let [counter @(rf/subscribe [:get-counter])
-        tap-enabled? @(rf/subscribe [:counter-tappable?])]
-    [:> rn/View {:style {:flex 1
-                         :padding-vertical 50
-                         :justify-content :space-between
-                         :align-items :center
-                         :background-color :white}}
-     [:> rn/View {:style {:align-items :center}}
-      [:> rn/Text {:style {:font-weight   :bold
-                           :font-size     72
-                           :color         :blue
-                           :margin-bottom 20}} counter]
-      [button {:on-press #(rf/dispatch [:inc-counter])
-               :disabled? (not tap-enabled?)
-               :style {:background-color :blue}}
-       "Tap me, I'll count"]]
-     [:> rn/View
-      [:> rn/View {:style {:flex-direction :row
-                           :align-items :center
-                           :margin-bottom 20}}
-       [:> rn/Image {:style {:width  160
-                             :height 160}
-                     :source cljs-splash}]
-       [:> rn/Image {:style {:width  160
-                             :height 160}
-                     :source shadow-splash}]]
-      [:> rn/Text {:style {:font-weight :normal
-                           :font-size   15
-                           :color       :blue}}
-       "Using: shadow-cljs+expo+reagent+re-frame"]]
-     [:> StatusBar {:style "auto"}]]))
+  [:> rn/View {:style {:flex 1
+                       :padding-vertical 50
+                       :justify-content :space-between
+                       :align-items :center
+                       :background-color :white}}
+   (let [articles @(rf/subscribe [:get-articles])]
+     (into [:> rn/View {:style {:align-items :center}}]
+           (for [{:keys [title]} articles]
+             [:> rn/Text {:style {:font-weight   :bold
+                                  :font-size     14
+                                  :color         :blue
+                                  :margin-bottom 20}} title])))
+   [:> StatusBar {:style "auto"}]])
 
 (defn start
   {:dev/after-load true}

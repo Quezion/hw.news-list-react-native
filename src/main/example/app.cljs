@@ -1,5 +1,6 @@
 (ns example.app
-  (:require [example.events]
+  (:require [day8.re-frame.http-fx] ;; must be here for app setup
+            [example.events]
             [example.subs]
             [example.widgets :refer [button]]
             [expo.root :as expo-root]
@@ -29,6 +30,7 @@
 (defn start
   {:dev/after-load true}
   []
+  (rf/dispatch [:load-articles])
   (expo-root/render-root (r/as-element [root])))
 
 (defn init []

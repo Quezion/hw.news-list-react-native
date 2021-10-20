@@ -16,11 +16,14 @@
                        :background-color :white}}
    (let [articles @(rf/subscribe [:get-articles])]
      (into [:> rn/View {:style {:align-items :center}}]
-           (for [{:keys [title]} articles]
-             [:> rn/Text {:style {:font-weight   :bold
-                                  :font-size     14
-                                  :color         :blue
-                                  :margin-bottom 20}} title])))
+           (for [{:keys [title date url]} articles]
+             [button {:on-press #(rf/dispatch [:open-url url])
+                      :style {:font-weight   :bold
+                              :font-size     14
+                              :color         :orange
+                              :margin-bottom 20
+                              :border-radius 50
+                              }} title])))
    [:> StatusBar {:style "auto"}]])
 
 (defn start

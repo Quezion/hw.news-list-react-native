@@ -3,13 +3,13 @@
 
 
 (defn button [{:keys [style text-style on-press
-                       disabled? disabled-style disabled-text-style]
-                :or {on-press #()}} text]
+                      disabled? disabled-style disabled-text-style]
+               :or {on-press #()}} text]
   [:> rn/TouchableOpacity {:style (cond-> {:font-weight      :bold
-                                           :font-size        18
+                                           :font-size        16
                                            :padding          6
-                                           :background-color :blue
-                                           :border-radius    999
+                                           ;;:background-color :blue
+                                           ;;:border-radius    999
                                            :margin-bottom    20}
                                     :always (merge style)
                                     disabled? (merge {:background-color "#aaaaaa"}
@@ -20,7 +20,8 @@
                                 :padding-right 12
                                 :font-weight   :bold
                                 :font-size     18
-                                :color         :white}
+                                ;;:color         :white
+                                }
                          :always (merge text-style)
                          disabled? (merge {:color :white}
                                           disabled-text-style))}

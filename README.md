@@ -24,18 +24,6 @@ Besides the commit history, I have preserved a few snapshots of the app's develo
 
 # React Native using shadow-cljs in 3 minutes
 
-The fastest way a [ClojureScript](https://clojurescript.org/) coder can get started with React Native development. *Prove me wrong.*
-
-This is an example project, only slightly beyond *Hello World*, using: [shadow-cljs](https://github.com/thheller/shadow-cljs), [React Native](https://facebook.github.io/react-native/), [Expo](https://expo.io/), [Reagent](https://reagent-project.github.io/), and [re-frame](https://github.com/Day8/re-frame).
-
-<div style="display: flex; justify-content: space-around;">
-  <div style="flex: 1"><img src="./rn-rf-shadow.png" width="240" /></div>
-  <div style="flex: 1">Check this video out for a demo of this project.<br>
-  <a href="https://www.youtube.com/watch?v=QsUj7HO5xDg"><img src="https://img.youtube.com/vi/QsUj7HO5xDg/maxresdefault.jpg" width="320px"><br>
-ClojureScript ❤️ React Native</a>
-  </div>
-</div>
-
 Follow along to get started. There are instructions for [Calva](http://calva.io), [Emacs/CIDER](https://cider.mx), [Cursive](https://cursive-ide.com), and the command line. It is assumed you have Java and Node installad as well as dev tool chains for the platforms you are targeting. (If you are targeting the Web, then Chrome is enough.)
 
 ## Installing

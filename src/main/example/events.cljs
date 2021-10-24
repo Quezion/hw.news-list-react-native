@@ -5,21 +5,13 @@
                           reg-event-fx]]
    [example.db :as db :refer [app-db]]
    ["react-native" :as rn]
+   [example.react :refer [linking]]
    [ajax.core :as ajax]))
-
-(defn get-react-property
-  "Little shim to fetch these at runtime"
-  [name]
-  (if rn
-    (aget rn name)
-    #js {}))
 
 (reg-event-db
  :initialize-db
  (fn [_ _]
    app-db))
-
-(def linking (get-react-property "Linking"))
 
 ;; The isolation of 'effect' from 'event' here is a re-frame tricked to improve testability
 ;; It would also allow for more complex app functions -- like transacting to the database
@@ -80,8 +72,8 @@
 (reg-event-fx
  :load-articles-succeeded
  (fn [{:keys [db]} [_ response]]
-   (println "load succeeded, response below")
-   (println response)
+   ;;(println "load succeeded, response below")
+   ;;(println response)
    (let [articles (-> response
                       (js->clj {:keywordize-keys true})
                       :results)]
@@ -92,7 +84,8 @@
  :load-articles-failed
  (fn [{:keys [db]} response]
    (println "load failed, response below")
-   (println response)))
+   (println response)
+   {:db (update db :loading? false)}))
 
 (reg-event-fx
  :load-articles

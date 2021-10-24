@@ -1,7 +1,6 @@
 (ns example.widgets
   (:require ["react-native" :as rn]))
 
-
 (defn button [{:keys [style text-style on-press
                       disabled? disabled-style disabled-text-style]
                :or {on-press #()}} text]

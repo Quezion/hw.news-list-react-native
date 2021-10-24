@@ -20,3 +20,4 @@ app/*
 .calva/output-window/
 .lsp/sqlite*.db
 .DS_Store
+app/index.js

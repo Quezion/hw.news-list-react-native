@@ -5,17 +5,15 @@
             [example.widgets :refer [button]]
             [example.react :refer [flat-list
                                    text
-                                   view]]
+                                   view
+                                   touchable-highlight]]
             [expo.root :as expo-root]
             ["expo-status-bar" :refer [StatusBar]]
             [re-frame.core :as rf]
             ["react-native" :as rn]
-            [reagent.core :as r]
+            [reagent.core :as r]))
 
-            ["create-react-class" :as crc]
-            ["expo" :as expo]))
-
-(defn row
+(defn article-row
   [id title]
   (-> [:> view {:style {:margin-top 0 :margin-bottom 0
                         :margin-left 0 :margin-right 0
@@ -37,9 +35,18 @@
           title]]]]
       (with-meta {:key id})))
 
+(defn clickable-wrapper
+  [callback child]
+  (let [bg-color "transparent"
+        on-press callback]
+    [:> touchable-highlight {:on-press on-press
+                             :underlay-color "white"}
+     child]))
+
 (defn render-article
-  [{:keys [url title] :as article}]
-  (row url title))
+  [{:keys [url title]}]
+  (clickable-wrapper #(rf/dispatch [:open-url url])
+                     (article-row url title)))
 
 (defn article-display-panel
   [articles]
@@ -52,20 +59,6 @@
                                          :margin-left      0
                                          :margin-vertical  0
                                          :padding-bottom 10}}]])
-
-(def sample-articles
-  [{:title "On a Pacific Island, Russia Tests Its Battle Plan for Climate Change"
-    :url "https://www.nytimes.com/2021/10/19/world/europe/russia-climate-change.html"
-    :date "October 19th, 2021"}
-   {:title "What Does Horror Taste Like? ‘Carnage Asada’ and Bloody Cocktails"
-    :url "https://www.nytimes.com/2021/10/18/dining/new-horror-restaurants.html"
-    :date "October 18th, 2021"}
-   {:title "Bellinger’s Blast Breathes Life Into Dodgers Offense"
-    :url "https://www.nytimes.com/2021/10/19/sports/baseball/los-angeles-atlanta-nlcs-game3-bellinger.html"
-    :date "October 19th, 2021"}
-   {:title "Despite a Punishing Drought, San Diego Has Water. It Wasn’t Easy."
-    :url "https://www.nytimes.com/2021/10/17/us/san-diego-drought.html"
-    :date "October 17th, 2021"}])
 
 (defn root []
   (fn []

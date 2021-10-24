@@ -1,3 +1,27 @@
+
+# Review Instructions
+
+This takehome app is per instructions at [APP-SPEC.md](APP-SPEC.md). It's a CLJS React-Native Expo app based off template at [PEZ/rn-rf-shadow](https://github.com/PEZ/rn-rf-shadow). This repo's README has been copied below & it contains instructions for running the app.
+
+The app uses [re-frame](https://github.com/day8/re-frame) as an opinionated way to handle separation of subscriptions, events, & views. This is an excellent wrapper around [Reagent](https://reagent-project.github.io/) (which wraps React) as the strong separation of concerns leads to greater testability.
+
+The app implements the following from the app-spec.
+* Async loads from NYT API "all category" & populates app-db. See [example.events/:load-articles](https://github.com/OdekoTeam/nyt-challenge-Quezion/blob/main/src/main/example/events.cljs#L91)
+* Scrollable flat-list subscribed to db's loaded articles. See [example.app/article-display-panel](https://github.com/OdekoTeam/nyt-challenge-Quezion/blob/main/src/main/example/app.cljs#L74 )
+* Clickable articles to go to respective NYT page
+* Tested against Android emulator in vertical view. _Should_ work with iOS
+  * Horizontal view not supported
+
+There are many requested features that weren't implemented out of respect for the 3hr time limit. As far as "next steps" for continued development:
+* Loading more articles when FlatList fires `onEndReached`
+* Adding data validation (such as [Malli specs](https://github.com/metosin/malli))
+  * Should wire this up to validate `app-db` against a spec on every mutation during dev/testing. Causes failure as soon as any event writes bad data to app-db
+* Leverage [re-frame-test](https://github.com/day8/re-frame-test) to add basic tests (such as :load-articles event)
+
+Besides the commit history, I have preserved a few snapshots of the app's development in `images/`. The latest is included below.
+
+![Alt text](/images/4.png?raw=true "Rendering flat-list with NYT /all")
+
 # React Native using shadow-cljs in 3 minutes
 
 The fastest way a [ClojureScript](https://clojurescript.org/) coder can get started with React Native development. *Prove me wrong.*
@@ -34,7 +58,7 @@ From there use your favorite editor and/or the prompt.
 1. Then **Run Build Task**. This will start Expo and the Metro
    builder. Wait for it to fire up Expo DevTools in your browser.
    1. Click **Run in web browser**
-1. When the app is running the Calva CLJS REPL can be used. Confirm this by evaluating something like: 
+1. When the app is running the Calva CLJS REPL can be used. Confirm this by evaluating something like:
    ``` clojure
    (js/alert "Hello world!")
    ```
@@ -66,31 +90,31 @@ Open Emacs and a bash shell:
    simulator, and transmit the bundled app. Be patient at this step as
    it can take many seconds to complete. When the app is finally
    running expo will display the message:
-   
+
        WebSocket connected!
        REPL init successful
 1. Once you see that the REPL is initalized, you can return to Emacs
    and confirm the REPL is connected and functional:
    ``` clojure
    cljs.user> (js/alert "hello world!")
-   ```   
+   ```
    Which should pop-up a modal alert in the simulator, confirming the
    app is running and the REPL is connected end to end.
 
 ## Using IntelliJ + Cursive REPL
 
 1. Follow the instructions specified in [Or the Command line](#or-the-command-line).
-2. Open up the project in IntelliJ by pressing `Open or Import` and opening the project root directory. 
+2. Open up the project in IntelliJ by pressing `Open or Import` and opening the project root directory.
 3. Setup a project SDK by pressing `File > Project Structure`, selecting an SDK under `Project SDK` and pressing `OK`.
-4. Select the REPL by pressing `Run > Edit Configurations` and selecting `Clojure REPL > REPL`. 
-5. Run the REPL by pressing `Run > Run 'REPL'`. 
+4. Select the REPL by pressing `Run > Edit Configurations` and selecting `Clojure REPL > REPL`.
+5. Run the REPL by pressing `Run > Run 'REPL'`.
 6. Run the commands in [Using ClojureScript REPL](#using-clojurescript-repl)
 
 ## Or the Command line
 ```sh
 $ npm i
 $ npx shadow-cljs watch app
-# wait for first compile to finish or expo gets confused 
+# wait for first compile to finish or expo gets confused
 # on another terminal tab/window:
 $ npm start
 ```
@@ -103,9 +127,9 @@ Note that you can also run the following instead of `npm start` to run the app i
    ```
    # same as npx expo start --web
    $ npm run web
-   
+
    # or
-   
+
    # same as npx expo start --web-only
    $ npm run web-only
    ```

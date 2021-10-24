@@ -8,10 +8,7 @@
                 [re-frame "1.2.0"]
 
                 ;; Async HTTP requests as re-frame effects via cljs-ajax
-                [day8.re-frame/http-fx "0.2.3"]
-
-                ;; Elegant threading macros for a more civilized age
-                [swiss-arrows "1.0.0"]]
+                [day8.re-frame/http-fx "0.2.3"]]
 
  :builds       {:app {:target           :react-native
                       :init-fn          example.app/init

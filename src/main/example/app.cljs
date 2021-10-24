@@ -2,7 +2,6 @@
   (:require [day8.re-frame.http-fx] ;; must be here for app setup
             [example.events]
             [example.subs]
-            [example.widgets :refer [button]]
             [example.react :refer [flat-list
                                    text
                                    view
@@ -13,26 +12,46 @@
             ["react-native" :as rn]
             [reagent.core :as r]))
 
+(defn trunc
+  "This is unexpectedly missing in clojure.string"
+  [s n]
+  (subs s 0 (min (count s) n)))
+
+(defn trunc-trailing-dots
+  "Forces string to maximum width. Appends with ... if string would be too long"
+  [length s]
+  (if (neg? (- length (count s)))
+    (str (trunc s (- length 3)) "...")
+    s))
+
 (defn article-row
-  [id title]
+  [id title date abstract]
   (-> [:> view {:style {:margin-top 0 :margin-bottom 0
                         :margin-left 0 :margin-right 0
                         :padding-top 0
                         :padding-bottom 0
-                        :height 60
+                        :height (if (seq abstract)
+                                  80
+                                  50)
                         :border-bottom-width 1
                         :flex-direction "row"
                         :background-color "transparent"}}
        [:> view {:style {:flex-direction "column"
                          :padding-left 2}}
         [:> view {:style {:flex-direction "row"
-                          :flex 1
                           :width "100%"}}
-         [:> text {:number-of-lines 1
-                   :style {:font-size 12 :font-weight "bold"
+         [:> text {:style {:font-size 12 :font-weight "bold"
                            :text-align "left"
-                           :margin-top -2}}
-          title]]]]
+                           :margin-top 0}}
+          (trunc-trailing-dots 66 title)]]
+        [:> text {:style {:font-size 12
+                          :text-align "left"
+                          :margin-top 1}}
+         (str date)]
+        [:> text {:style {:font-size 10
+                          :text-align "left"
+                          :margin-top 3}}
+         (trunc-trailing-dots 160 abstract)]]]
       (with-meta {:key id})))
 
 (defn clickable-wrapper
@@ -44,9 +63,9 @@
      child]))
 
 (defn render-article
-  [{:keys [url title]}]
+  [{:keys [url title published_date abstract]}]
   (clickable-wrapper #(rf/dispatch [:open-url url])
-                     (article-row url title)))
+                     (article-row url title published_date abstract)))
 
 (defn article-display-panel
   [articles]

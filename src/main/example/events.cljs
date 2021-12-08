@@ -26,7 +26,7 @@
  (fn [{:keys [db]} [_ url]]
    {:goto-url url}))
 
-;; For this small repo, these are my personal credentials -- no misusing! :)
+;; PUT YOUR OWN CREDENTIALS BELOW! I've already invalidated these :)
 (def credentials
   {:api-key "Ls0iGCzqn0WCVGcykutnFWPAsHosrpva"
    :password "BHAANknfG9cp72pL"

@@ -1,7 +1,9 @@
 
 # Review Instructions
 
-This takehome app is per instructions at [APP-SPEC.md](APP-SPEC.md). It's a CLJS React-Native Expo app based off template at [PEZ/rn-rf-shadow](https://github.com/PEZ/rn-rf-shadow). This repo's README has been copied below & it contains instructions for running the app.
+This is a demo takehome app. It's built as a CLJS React-Native Expo app based off template at [PEZ/rn-rf-shadow](https://github.com/PEZ/rn-rf-shadow). This repo's README has been copied below & it contains instructions for running the app.
+
+**You'll need to set your own credentials in namespace `example.events/credentials`**
 
 The app uses [re-frame](https://github.com/day8/re-frame) as an opinionated way to handle separation of subscriptions, events, & views. This is an excellent wrapper around [Reagent](https://reagent-project.github.io/) (which wraps React) as the strong separation of concerns leads to greater testability.
 
